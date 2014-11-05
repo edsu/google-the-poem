@@ -4,7 +4,7 @@ Googly Vogonicus is an epic alien poem generated from Google's [auto-complete](h
 
 I know, I had no idea aliens independently evolved JavaScript! It's astounding.
 
-Googly Vogonicus is also my entry for [NaNoGenMo](https://github.com/dariusk/NaNoGenMo/issues/85). You can see a more dynamic version of this poem on the [World Wide Web](http://inkdroid.org/vogon).
+Googly Vogonicus is also my entry for [NaNoGenMo](https://github.com/dariusk/NaNoGenMo/issues/85). I guess this amounts to plagiarism. I apologize for this. You can see a more dynamic version of this poem on the [World Wide Web](http://inkdroid.org/vogon).
 
 ## Run
 
