@@ -1,0 +1,11 @@
+{
+  "name": "googly_vogonicus",
+  "version": "0.0.1",
+  "author": "Ed Summers <ehs@pobox.com>",
+  "main": "googly_vogonicus",
+  "repository": "https://github.com/edsu/googly_vogonicus",
+  "dependencies": {
+    "request": "latest",
+    "sleep": "latest"
+  }
+}
