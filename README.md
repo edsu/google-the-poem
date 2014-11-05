@@ -1,6 +1,6 @@
 # Googly Vogonicus
 
-Googly Vogonicus is an epic alien poem generated from Google's [auto-complete](https://support.google.com/websearch/answer/106230?hl=en). I found the source code on a USB stick in the smoking remains of a [Vogon](https://en.wikipedia.org/wiki/Vogon) battleship, named the Aspargus Turbine in Rushville, Nebraska. It seems to have been some failed experiment to communicate with the human race via the one remaining fully public free web service API offered by Google.
+Googly Vogonicus is an epic alien poem generated from Google's [auto-complete](https://support.google.com/websearch/answer/106230?hl=en). I found the source code on a USB stick in the smoking remains of a [Vogon](https://en.wikipedia.org/wiki/Vogon) battleship, named the Aspargus Turbine in Rushville, Nebraska. It seems to have been some kind of failed experiment to communicate with the human race via the one remaining fully public free web service API offered by Google.
 
 I know, I had no idea aliens independently evolved JavaScript! Or maybe they
 learned it from old TV episodes that were beamed into space. It's not really
