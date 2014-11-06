@@ -3,23 +3,39 @@
  * epic poem.
  */
 
-var seed = 'Vogon';
-var seed = 'воген';
-var language = 'ru'; // an ISO 639-1 code
-var verbProbability = 0.6;
-var stanzaLines = 2;
-var poem = '';
-var maxWords = 50000;
-
 var sleep = require('sleep');
 var request = require('request');
+var winston = require('winston');
 var verb = require('./lib/verb.js');
-var lineCount = 0;
 
+/*
+ * You can modify these variables to change the behavior.
+ */
+
+var seed = 'Vogon';        // the word to use to start the poem
+var language = 'en';       // an ISO 639-1 code
+var t = .5 * 1000000;       // microseconds to sleep between google requests
+var stanzaLines = 2;       // how many lines per stanza
+var maxWords = 50000;      // length of the poem in words
+var verbProbability = 0.6; // percentage of time to add a random verb
+
+/* 
+ * Don't modify these :)
+ */
+
+var poem = '';
+var lineCount = 0;
 var wordCount = 0;
+var lastLine = null;
+
+/*
+ * deep breath
+ */
 
 function main() {
-  getLine(seed, writeLine);
+  winston.add(winston.transports.File, {filename: 'googly_vogonicus.log'});
+  winston.remove(winston.transports.Console);
+  getLine(seed, writeLine, t);
 }
 
 /*
@@ -27,15 +43,24 @@ function main() {
  */
 
 function writeLine(line) {
-  // if we didn't get a suggestion try again
+  // if we didn't get a suggestion try again using the poem as seed text
   if (line == null && wordCount < maxWords) {
-    getLine(getSeed(poem), writeLine);
+    winston.warn("ran out of suggestions, using poem as seed");
+    getLine(getSeed(poem), writeLine, t * 2);
   } 
+
+  // if we start to repeat ourself get a new seed from the poem
+  if (line == lastLine) {
+    winston.warn("got repeat", {line: line});
+    getLine(getSeed(poem), writeLine, line * 2);
+  }
 
   // otherwise write the line  
   else {
-    // write the line in the poem
     console.log(line);
+    winston.info("wrote line", {line: line});
+
+    // remember the entire text of the poem in case we need it for seed text
     poem += line + " ";
 
     // add a stanza break
@@ -47,8 +72,7 @@ function writeLine(line) {
     // write more lines?
     wordCount += line.split(' ').length;
     if (wordCount < maxWords) {
-      sleep.sleep(1);
-      getLine(getSeed(line), writeLine);
+      getLine(getSeed(line), writeLine, t);
     }
   }
 }
@@ -57,13 +81,21 @@ function writeLine(line) {
  * creates a new line in the poem based on the last
  */
 
-function getLine(seed, callback) {
+function getLine(seed, callback, t) {
+  winston.info("sleeping for " + t);
+  sleep.usleep(t);
   var url = 'http://suggestqueries.google.com/complete/search?client=chrome&hl=' + language + '&q=' + seed;
   request.get({url: url, json: true}, function(err, resp, data) {
+    if (data.length != 5) {
+      winston.error('unexpected results from google: ', {data: data});
+      return getLine(seed, callback, t * 2);
+    }
+
     var phrases = data[1];
 
     // if we don't have any suggestions try again with another seed
     if (phrases.length === 0) {
+      winston.warn("no suggestions for seed", {seed: seed});
       return callback(null);
     }
 
@@ -93,8 +125,9 @@ function getSeed(text) {
   var seed = text;
   if (words.length > 1) {
     var i = Math.floor(Math.random() * words.length)
-    seed = words.slice(i, i + 1);
+    seed = words[i];
   }
+  winston.info("created seed", {seed: seed});
   return seed;
 }
 

@@ -6,6 +6,7 @@
   "repository": "https://github.com/edsu/googly_vogonicus",
   "dependencies": {
     "request": "latest",
-    "sleep": "latest"
+    "sleep": "latest",
+    "winston": "latest"
   }
 }
