@@ -18,6 +18,6 @@ At any rate, Googly Vogonicus is also my entry for [NaNoGenMo](https://github.co
 ## Configure
 
 Not much thought has gone into usability, but you can play with the `seed`,
-`verbProbability` and `stanzaLines` variables at the top of 
+`language`, `verbProbability` and `stanzaLines` variables at the top of 
 `googly_vogonicus.js` if you want to experiment. Pull requests are welcome.
 
