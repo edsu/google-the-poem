@@ -8,7 +8,7 @@ clear what happened, or how their fire-proof USB sticks were interoperable with
 OS X. Perhaps this is a stunt, and I have been duped. Now that I think about it,
 this seems very likely.
 
-At any rate, Googly Vogonicus is also my entry for [NaNoGenMo](https://github.com/dariusk/NaNoGenMo/issues/85). I guess this amounts to plagiarism. I apologize for this. You can see a more dynamic version of this poem on the [World Wide Web](http://inkdroid.org/vogon).
+At any rate, Googly Vogonicus is also my entry for [NaNoGenMo](https://github.com/dariusk/NaNoGenMo-2014/issues/71). I guess this amounts to plagiarism. I apologize for this. You can see a more dynamic version of this poem on the [World Wide Web](http://inkdroid.org/vogon).
 
 ## Run
 
