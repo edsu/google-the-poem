@@ -12,9 +12,9 @@ var verb = require('./lib/verb.js');
  * You can modify these variables to change the behavior.
  */
 
+var t = 1000000;           // microseconds to sleep between google requests
 var seed = 'Vogon';        // the word to use to start the poem
 var language = 'en';       // an ISO 639-1 code
-var t = .5 * 1000000;       // microseconds to sleep between google requests
 var stanzaLines = 2;       // how many lines per stanza
 var maxWords = 50000;      // length of the poem in words
 var verbProbability = 0.6; // percentage of time to add a random verb
@@ -33,7 +33,7 @@ var lastLine = null;
  */
 
 function main() {
-  winston.add(winston.transports.File, {filename: 'googly_vogonicus.log'});
+  winston.add(winston.transports.File, {filename: 'run.log'});
   winston.remove(winston.transports.Console);
   getLine(seed, writeLine, t);
 }
@@ -86,7 +86,7 @@ function getLine(seed, callback, t) {
   sleep.usleep(t);
   var url = 'http://suggestqueries.google.com/complete/search?client=chrome&hl=' + language + '&q=' + seed;
   request.get({url: url, json: true}, function(err, resp, data) {
-    if (data.length != 5) {
+    if (! data || data.length != 5) {
       winston.error('unexpected results from google: ', {data: data});
       return getLine(seed, callback, t * 2);
     }
